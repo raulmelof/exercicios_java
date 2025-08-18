@@ -1,0 +1,43 @@
+================================================================================
+          JUSTIFICATIVA DE DESIGN - PROTÓTIPO VCRIQUINHO
+================================================================================
+
+O design do protótipo VcRiquinho foi estruturado para ser flexível, robusto
+e extensível, utilizando os conceitos de Programação Orientada a Objetos (POO)
+solicitados para modelar o complexo domínio de clientes, contas e produtos de
+investimento.
+
+--------------------------------------------------
+1. Herança
+--------------------------------------------------
+A herança foi utilizada para modelar as relações "é um tipo de", evitando a
+duplicação de código e criando hierarquias lógicas.
+
+* Cliente: A classe abstrata `Cliente` define atributos comuns (nome, e-mail). As classes `PessoaFisica` e `PessoaJuridica` herdam de `Cliente`, adicionando seus atributos específicos (CPF e CNPJ, respectivamente).
+* Conta: A classe abstrata `Conta` define uma estrutura base. As classes `ContaCorrente`, `ContaCDI` e `ContaInvestimentoAutomatico` herdam dela, cada uma representando um tipo específico de conta com regras próprias.
+* ProdutoInvestimento: Da mesma forma, `RendaFixa` e `RendaVariavel` herdam da classe base `ProdutoInvestimento`, compartilhando atributos como nome e descrição.
+
+--------------------------------------------------
+2. Polimorfismo
+--------------------------------------------------
+O polimorfismo é o pilar da funcionalidade de simulação, permitindo que o
+sistema trate objetos de diferentes classes de maneira uniforme.
+
+* Cálculo de Rendimento: O método `simularRendimento()` é definido como abstrato na classe `Conta`. Cada subclasse concreta (ContaCDI, ContaInvestimentoAutomatico, etc.) fornece sua própria implementação. O simulador simplesmente itera sobre a lista de contas de um cliente e chama o método `simularRendimento()`, sem precisar saber o tipo exato de cada conta.
+* Benefício: Essa abordagem torna o sistema altamente extensível. Para adicionar um novo tipo de conta no futuro (ex: Conta em Criptoativos), bastaria criar uma nova subclasse de `Conta` e implementar seu método de cálculo, sem alterar o código do simulador.
+
+--------------------------------------------------
+3. Classes Abstratas
+--------------------------------------------------
+As classes base `Cliente`, `Conta` e `ProdutoInvestimento` foram definidas como
+abstratas para servir como um "contrato" para suas subclasses.
+
+* Justificativa: Não faz sentido no domínio do problema instanciar um "Cliente genérico" ou uma "Conta genérica". Elas existem para definir uma estrutura e forçar as classes filhas a implementarem comportamentos essenciais, como os métodos abstratos de cálculo.
+
+--------------------------------------------------
+4. Encapsulamento
+--------------------------------------------------
+O encapsulamento foi aplicado para proteger os dados internos dos objetos e
+garantir o acesso seguro a eles.
+
+* Implementação: Atributos como `saldo` em `Conta` e `cpf` em `PessoaFisica` são declarados como privados ou protegidos. O acesso e a modificação desses dados são controlados por meio de métodos públicos (getters/setters), garantindo a integridade e ocultando a complexidade interna.

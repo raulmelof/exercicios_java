@@ -1,0 +1,35 @@
+================================================================================
+      JUSTIFICATIVA DE DESIGN - PROTÓTIPO LANCHONETE QUASE TRÊS LANCHES
+================================================================================
+
+O design do protótipo da lanchonete teve como objetivo finalizar um esboço
+preliminar, criando uma estrutura lógica e de fácil manutenção para gerenciar
+pedidos e produtos, utilizando os conceitos de Herança e Polimorfismo conforme
+solicitado.
+
+--------------------------------------------------
+1. Herança e a Classe Abstrata `Prato`
+--------------------------------------------------
+A principal escolha de design foi criar uma hierarquia para os produtos vendidos.
+
+* Justificativa: O requisito especificava que todos os itens de venda (pizzas, lanches e salgadinhos) compartilhavam atributos em comum: preço de venda, data de validade e peso. A herança foi a solução ideal para modelar essa relação.
+* Implementação: A classe `Prato` foi criada como uma classe base `abstract` para conter esses atributos comuns. Ela é abstrata porque a lanchonete não vende um "prato genérico", mas sim itens específicos. As classes `Pizza`, `Lanche` e `Salgadinho` herdam de `Prato`, adicionando seus próprios atributos (ex: `borda` para Pizza, `tipoPao` para Lanche).
+
+--------------------------------------------------
+2. Polimorfismo no `Pedido`
+--------------------------------------------------
+O polimorfismo foi essencial para gerenciar os itens de um pedido de forma
+simples e eficiente.
+
+* Justificativa: Um pedido é composto por uma lista de itens variados. O sistema precisava de uma forma de tratar essa coleção heterogênea de objetos de maneira uniforme.
+* Implementação: A classe `Pedido` contém uma lista do tipo `List<Prato>`. Graças ao polimorfismo, qualquer objeto que seja uma subclasse de `Prato` (como um objeto `Pizza` ou `Lanche`) pode ser adicionado a essa lista.
+* Benefício: Ao calcular o valor total do pedido no método `calcularTotal()`, o código simplesmente itera pela lista e chama o método `getPreco()` de cada item. Não é necessário verificar o tipo de cada item com `if/else`. Isso torna o código mais limpo e, principalmente, mais fácil de estender. Se a lanchonete decidir vender um novo tipo de item (ex: `Bebida`), basta criar a nova classe herdando de `Prato`, e a classe `Pedido` funcionará com ela sem precisar de nenhuma modificação.
+
+--------------------------------------------------
+3. Composição e a Classe `Pedido`
+--------------------------------------------------
+A relação entre um pedido e os pratos que ele contém foi modelada usando
+composição.
+
+* Justificativa: Um `Pedido` "tem" uma lista de `Pratos`. Essa relação "tem-um" é classicamente modelada por composição ou agregação.
+* Implementação: A presença do atributo `List<Prato> itensConsumidos` dentro da classe `Pedido` representa essa composição. A classe `Pedido` é responsável por gerenciar seu ciclo de vida e suas operações, como adicionar itens e calcular o valor total.
