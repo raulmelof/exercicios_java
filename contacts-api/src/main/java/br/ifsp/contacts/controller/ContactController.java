@@ -143,4 +143,24 @@ public class ContactController {
         Contact updatedContact = contactRepository.save(contact);
         return ResponseEntity.ok(updatedContact);
     }
+
+    /*   EXERCICIO 3 AULA 3
+     *   Qual a principal diferença entre REST e SOAP?
+     *   R: Enquanto REST garante uma estrutura previsível e intuitiva, além de padronização e flexibilidade por trabalhar com diversos formatos de dados, SOAP é mais rígido, com um padrão estrito baseado em XML, oferecendo maior segurança e confiabilidade para transações complexas.
+     * 
+     *   Em quais cenários SOAP ainda é utilizado?
+     *   R: Principalmente em sistemas legados e em sistemas que exigem altos níveis de segurança e transações complexas, como em serviços financeiros e governamentais.
+     * 
+     *   Quais são as vantagens e desvantagens de usar REST ao invés de SOAP?
+     *   R: REST é mais simples, flexível e escalável, também tem melhor desempenho, porém falta padrões rígidos e segurança integrada que o SOAP oferece. SOAP é mais adequado para operações complexas e transações seguras, mas é mais pesado e complexo de implementar.
+     * 
+     *   O que é WS-Security e como ele se compara à segurança em APIs REST?
+     *   R: WS-Security é um padrão para aplicar segurança em mensagens SOAP. REST geralmente usa HTTPS para segurança em trânsito e pode implementar autenticação via tokens (como JWT) para segurança em APIs.
+     * 
+     *   Explique o modelo de maturidade de Richardson.
+     *   R: O modelo de maturidade de Richardson classifica APIs REST em quatro níveis: o nível 0 (uso de HTTP como transporte simples), o nível 1 (uso de recursos), o nível 2 (uso de métodos HTTP corretos) e o nível 3 (uso de HATEOAS para hipermídia).
+     * 
+     *   O que é GraphQL? Pesquisa e relacione com os conceitos vistos em aula.
+     *   R: GraphQL é uma linguagem de consulta para APIs. Uma alternativa ao REST, permitindo que os clientes solicitem exatamente os dados de que precisam, reduzindo a quantidade de dados transferidos e melhorando a eficiência das consultas.
+     */  
 }
