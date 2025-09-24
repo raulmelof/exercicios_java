@@ -9,6 +9,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 /**
  * Classe que representa o modelo de dados para um Contato.
@@ -27,8 +30,14 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //DESAFIO 2 AULA 3
+    @NotBlank(message = "O nome não pode estar vazio")
     private String nome;
+    //DESAFIO 2 AULA 3
+    @Size(min = 8, max = 15, message = "O telefone deve ter entre 8 e 15 caracteres")
     private String telefone;
+    //DESAFIO 2 AULA 3
+    @Email(message = "O email deve ter um formato válido")
     private String email;
     //DESAFIO 1.2 AULA 3
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

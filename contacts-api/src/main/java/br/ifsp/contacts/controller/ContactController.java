@@ -22,6 +22,7 @@ import br.ifsp.contacts.model.Address;
 import br.ifsp.contacts.model.Contact;
 import br.ifsp.contacts.repository.AddressRepository;
 import br.ifsp.contacts.repository.ContactRepository;
+import jakarta.validation.Valid;
 
 /**
  * Classe responsável por mapear as rotas/endpoints relacionados
@@ -86,7 +87,7 @@ public class ContactController {
      * com os dados JSON enviados no corpo da requisição.
      */
     @PostMapping
-    public Contact createContact(@RequestBody Contact contact) {
+    public Contact createContact(@Valid @RequestBody Contact contact) {
         return contactRepository.save(contact);
     }
 
