@@ -1,9 +1,14 @@
 package br.ifsp.contacts.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 /**
  * Classe que representa o modelo de dados para um Contato.
@@ -25,6 +30,9 @@ public class Contact {
     private String nome;
     private String telefone;
     private String email;
+    //DESAFIO 1.2 AULA 3
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Address> addresses;
 
     // Construtor vazio exigido pelo JPA
     public Contact() {}
@@ -60,5 +68,11 @@ public class Contact {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 }

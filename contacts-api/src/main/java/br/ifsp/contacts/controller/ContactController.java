@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ifsp.contacts.model.Address;
 import br.ifsp.contacts.model.Contact;
+import br.ifsp.contacts.repository.AddressRepository;
 import br.ifsp.contacts.repository.ContactRepository;
 
 /**
@@ -41,6 +43,15 @@ public class ContactController {
      */
     @Autowired
     private ContactRepository contactRepository;
+
+    //DESAFIO 1.5 AULA 3
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @GetMapping("/{id}/addresses")
+    public List<Address> getAddressesByContactId(@PathVariable Long id) {
+        return addressRepository.findByContactId(id);
+    }
 
     /**
      * Método para obter todos os contatos.
